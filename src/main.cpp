@@ -12,7 +12,7 @@
 #define DELAYVAL 500
 
 Color color_cerca_principal(150, 0, 0);
-Color color_cerca_secundario(0, 250, 0);
+Color color_cerca_secundario(250, 150, 0);
 Color color_lejos_principal(150, 0, 0);
 Color color_lejos_secundario(150, 0, 0);
 
@@ -23,6 +23,7 @@ void setup() {
     #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
         clock_prescale_set(clock_div_1);
     #endif
+    brujula_led.actualizarGrado(0, 100);
 }
 
 void loop() {
