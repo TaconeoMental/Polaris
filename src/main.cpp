@@ -1,5 +1,9 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
+#include <SPI.h>
+//#include <SD.h>
+#include "SdFat.h"
+
 // Necesario para el anillo de Neopixels
 #ifdef __AVR__
     #include "avr/power.h"
@@ -9,12 +13,6 @@
 
 #define PIXELPIN  5
 #define NUMPIXELS 16
-
-// Dejar que el usuario cambie estos valores?
-Color color_cerca_principal(255, 0, 0); 
-Color color_cerca_secundario(255, 100, 0);
-Color color_lejos_principal(0, 200, 250);
-Color color_lejos_secundario(0, 0, 250);
 
 BrujulaLed brujula_led(NUMPIXELS, PIXELPIN, color_cerca_principal, color_cerca_secundario, color_lejos_principal, color_lejos_secundario);
 
