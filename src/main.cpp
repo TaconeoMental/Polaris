@@ -7,25 +7,25 @@
 #include <BrujulaLed.hpp>
 #include <canciones.hpp>
 
-#define PIN        2
+#define PIXELPIN  5
 #define NUMPIXELS 16
-#define DELAYVAL 500
 
-Color color_cerca_principal(150, 0, 0);
-Color color_cerca_secundario(250, 150, 0);
-Color color_lejos_principal(150, 0, 0);
-Color color_lejos_secundario(150, 0, 0);
+// Dejar que el usuario cambie estos valores?
+Color color_cerca_principal(255, 0, 0); 
+Color color_cerca_secundario(255, 100, 0);
+Color color_lejos_principal(0, 200, 250);
+Color color_lejos_secundario(0, 0, 250);
 
-BrujulaLed brujula_led(NUMPIXELS, PIN, color_cerca_principal, color_cerca_secundario, color_lejos_principal, color_lejos_secundario);
+BrujulaLed brujula_led(NUMPIXELS, PIXELPIN, color_cerca_principal, color_cerca_secundario, color_lejos_principal, color_lejos_secundario);
 
 void setup() {
+    Serial.begin(9600);
+    randomSeed(analogRead(0));
     // Necesario para el anillo de Neopixels
     #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
         clock_prescale_set(clock_div_1);
     #endif
-    brujula_led.actualizarGrado(0, 100);
 }
 
 void loop() {
-
 }

@@ -1,8 +1,6 @@
 #include <Adafruit_NeoPixel.h>
-
+//TODO: Implementar todo esto con FastLED.h
 class Color {
-private:
-    int promedioNums(int, int, int);
 public:
     int red;
     int green;
@@ -11,7 +9,8 @@ public:
         red(r),
         green(g),
         blue(b) {};
-    Color porcentajeRango(const Color&, int);
+    Color porcentajeColor(const Color&, int);
+    static int porcentajeRango(int, int, int);
     Color()=delete;
 };
 

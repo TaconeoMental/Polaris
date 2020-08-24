@@ -1,16 +1,20 @@
 #include <BrujulaLed.hpp>
 #include <Adafruit_NeoPixel.h>
 
-Color Color::porcentajeRango(const Color& color2, int porcentaje) {
-    Color color(promedioNums(this->red, color2.red, porcentaje), promedioNums(this->red, color2.red, porcentaje), promedioNums(this->red, color2.red, porcentaje));
+
+int Color::porcentajeRango(int color1, int color2, int porcentaje) {
+    Serial.println((porcentaje * (color1 - color2) / 100) + color2);
+    return (porcentaje * (color1 - color2) / 100) + color2;
+}
+
+
+Color Color::porcentajeColor(const Color& color2, int porcentaje) {
+    Color color(Color::porcentajeRango(this->red, color2.red, porcentaje), Color::porcentajeRango(this->green, color2.green, porcentaje), Color::porcentajeRango(this->blue, color2.blue, porcentaje));
     return color;
 }
 
-int Color::promedioNums(int r, int g, int b) {
-    return 0;
-}
-
 void BrujulaLed::actualizarGrado(float angulo, float distancia) {
+    this->clear();
     int num_led_principal = round((fmod(angulo, 360) / 360) * (this->num_leds - 1));
     int izquierda;
     int derecha;
@@ -22,11 +26,13 @@ void BrujulaLed::actualizarGrado(float angulo, float distancia) {
     } else if (num_led_principal == 0)
     {
         derecha = 15;
-        neopixel.setPixelColor(0, color_principal.red, color_principal.green, color_principal.blue);
     }
-    neopixel.setPixelColor(izquierda, color_secundario.red, color_secundario.green, color_secundario.blue);
-    neopixel.setPixelColor(derecha, color_secundario.red, color_secundario.green, color_secundario.blue);
-    neopixel.setPixelColor(num_led_principal, color_principal.red, color_principal.green, color_principal.blue);
+    Color color_principal_porcentaje = color_principal.porcentajeColor(this->color_lejano_principal, distancia);
+    Color color_secundario_porcentaje = color_secundario.porcentajeColor(this->color_lejano_secundario, distancia);
+
+    neopixel.setPixelColor(izquierda, color_secundario_porcentaje.red, color_secundario_porcentaje.green, color_secundario_porcentaje.blue);
+    neopixel.setPixelColor(derecha, color_secundario_porcentaje.red, color_secundario_porcentaje.green, color_secundario_porcentaje.blue);
+    neopixel.setPixelColor(num_led_principal, color_principal_porcentaje.red, color_principal_porcentaje.green, color_principal_porcentaje.blue);
 
     neopixel.show();
 }
