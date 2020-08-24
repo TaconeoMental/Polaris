@@ -11,10 +11,7 @@ int Color::promedioNums(int r, int g, int b) {
 }
 
 void BrujulaLed::actualizarGrado(float angulo, float distancia) {
-    int num_led_principal = round((fmod(angulo, 360) / 360) * this->num_leds);
-    if (angulo == 0) {
-        num_led_principal = 0;
-    }
+    int num_led_principal = round((fmod(angulo, 360) / 360) * (this->num_leds - 1));
     int izquierda;
     int derecha;
 
@@ -25,6 +22,7 @@ void BrujulaLed::actualizarGrado(float angulo, float distancia) {
     } else if (num_led_principal == 0)
     {
         derecha = 15;
+        neopixel.setPixelColor(0, color_principal.red, color_principal.green, color_principal.blue);
     }
     neopixel.setPixelColor(izquierda, color_secundario.red, color_secundario.green, color_secundario.blue);
     neopixel.setPixelColor(derecha, color_secundario.red, color_secundario.green, color_secundario.blue);
