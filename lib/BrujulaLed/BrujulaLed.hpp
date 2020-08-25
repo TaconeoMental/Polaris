@@ -14,12 +14,6 @@ public:
     Color()=delete;
 };
 
-// Dejar que el usuario cambie estos valores?
-Color color_cerca_principal(255, 0, 0); 
-Color color_cerca_secundario(255, 100, 0);
-Color color_lejos_principal(0, 200, 250);
-Color color_lejos_secundario(0, 0, 250);
-
 class BrujulaLed {
 private:
     int num_leds;
