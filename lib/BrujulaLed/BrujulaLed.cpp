@@ -15,7 +15,7 @@ Color Color::porcentajeColor(const Color& color2, int porcentaje) {
 
 void BrujulaLed::actualizarGrado(float angulo, float distancia) {
     this->clear();
-    int num_led_principal = round((fmod(angulo, 360) / 360) * (this->num_leds - 1));
+    int num_led_principal = round((fmod(angulo, 360) / 360) * (neopixel.numPixels() - 1));
     int izquierda;
     int derecha;
 

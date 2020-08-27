@@ -16,8 +16,6 @@ public:
 
 class BrujulaLed {
 private:
-    int num_leds;
-    int pin_leds;
     Color& color_principal;
     Color& color_secundario;
     Color& color_lejano_principal;
@@ -25,14 +23,12 @@ private:
 
     Adafruit_NeoPixel neopixel;
 public:
-    BrujulaLed(int _num_leds, int pin, Color& color_p, Color& color_s, Color& color_lejos_p, Color& color_lejos_s):
-        num_leds(_num_leds),
-        pin_leds(pin),
+    BrujulaLed(const Adafruit_NeoPixel& _neopixel, Color& color_p, Color& color_s, Color& color_lejos_p, Color& color_lejos_s):
         color_principal(color_p),
         color_secundario(color_s),
         color_lejano_principal(color_lejos_p),
-        color_lejano_secundario(color_lejos_s) {
-            neopixel = Adafruit_NeoPixel(num_leds, pin, NEO_GRB + NEO_KHZ800);
+        color_lejano_secundario(color_lejos_s),
+        neopixel(_neopixel) {
             neopixel.begin();
         };
 

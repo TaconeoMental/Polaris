@@ -92,12 +92,14 @@ struct nota_duracion {
   int nota, duracion;
 };
 
-class Cancion {
-public:
+struct Cancion {
     nota_duracion* nd;
     int cant_notas;
-    
-    Cancion(nota_duracion*, int);
+};
 
-    void sonar(int);
+class Tocador {
+  int pin_buzzer;
+public:
+  Tocador(int pb): pin_buzzer(pb){};
+  void tocar(const Cancion&);
 };

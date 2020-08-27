@@ -17,14 +17,18 @@
 #define PIXELPIN  5
 #define NUMPIXELS 16
 
+#define BUZZERPIN 8
 // Dejar que el usuario cambie estos valores?
 Color color_cerca_principal(255, 0, 0); 
 Color color_cerca_secundario(255, 100, 0);
 Color color_lejos_principal(0, 200, 250);
 Color color_lejos_secundario(0, 0, 250);
+Adafruit_NeoPixel neopixel(NUMPIXELS, PIXELPIN, NEO_GRB + NEO_KHZ800);
 
+BrujulaLed brujula_led(neopixel, color_cerca_principal, color_cerca_secundario, color_lejos_principal, color_lejos_secundario);
 QMC5883L brujula;
-BrujulaLed brujula_led(NUMPIXELS, PIXELPIN, color_cerca_principal, color_cerca_secundario, color_lejos_principal, color_lejos_secundario);
+
+Tocador tocador(BUZZERPIN);
 
 void setup() {
     Serial.begin(9600);
@@ -32,12 +36,10 @@ void setup() {
     #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
         clock_prescale_set(clock_div_1);
     #endif
-    /*
     Wire.begin();
 	brujula.init();
 	brujula.setSamplingRate(10);
     brujula.resetCalibration();
-    */
 }
 
 void loop() {

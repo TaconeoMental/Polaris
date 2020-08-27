@@ -36,16 +36,8 @@ nota_duracion menu[1] =  {
 };
 
 namespace Canciones {
-    Cancion atencion2(atencion4, 2);
-    Cancion atencion(att, 5);
-    Cancion alarma_1(sonido1, 6);
-    Cancion baja_bateria(bb, 6);
-};
-
-// For testing
-Cancion canciones_test[4] {
-    Canciones::atencion2,
-    Canciones::atencion,
-    Canciones::alarma_1,
-    Canciones::baja_bateria
+    Cancion atencion2{atencion4, 2};
+    Cancion atencion{att, 5};
+    Cancion alarma_1{sonido1, 6};
+    Cancion baja_bateria{bb, 6};
 };
